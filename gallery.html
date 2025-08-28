@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery - Humanity Through Hope</title>
+  <link rel="stylesheet" href="style.css"/>
+  
+</head>
+<body>
+  <header class="navbar">
+  <div class="logo">      
+      <img src="./logo.jpg" alt="Humanity Image" />
+  </div>
+  <nav>
+    <!-- Hamburger -->
+    <button class="hamburger" aria-label="Toggle Menu">☰</button>
+<div class="menu-overlay"></div>
+
+    <!-- Add class nav-links here -->
+    <ul class="nav-links">
+      <li><a href="index.html" class="link-underline">Home</a></li>
+      <li><a href="#about" class="link-underline">About</a></li>
+      <li><a href="#reviews" class="link-underline">Reviews</a></li>
+      <li><a href="gallery.html" class="link-underline">Gallery</a></li>
+      <li><a href="#donate" class="btn btn-outline btn-pill btn-xs">Donate</a></li>
+      <li><a href="#contact" class="link-underline">Contact</a></li>
+    </ul>
+  </nav>
+
+  
+</header>
+  
+
+
+  <main class="gallery-page">
+    <h1>Gallery / Media</h1>
+    <p>
+      Explore moments across communities. Each picture tells a story of resilience, 
+      hope, and the future we’re building together.
+    </p>
+
+    <!-- FILTER BUTTONS -->
+    <div class="filters">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="events">Events</button>
+      <button data-filter="children">Children</button>
+      <button data-filter="community">Community</button>
+    </div>
+
+    <!-- GALLERY GRID -->
+    <div class="gallery-grid">
+      <img src="1.jpg" alt="Image 1" data-category="events"/>
+      <img src="2.jpg" alt="Image 2" data-category="children"/>
+      <img src="3.jpg" alt="Image 3" data-category="community"/>
+      <img src="4.jpg" alt="Image 4" data-category="events"/>
+      <img src="4.jpg" alt="Image 5" data-category="children"/>
+      <img src="1.jpg" alt="Image 6" data-category="community"/>
+            <img src="1.jpg" alt="Image 5" data-category="events"/>
+      <img src="2.jpg" alt="Image 5" data-category="children"/>
+
+      <!-- keep adding as needed -->
+    </div>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img src="" alt="Expanded view"/>
+  </div>
+
+  <script>
+    // LIGHTBOX FUNCTIONALITY
+    const images = document.querySelectorAll(".gallery-grid img");
+    const lightbox = document.querySelector(".lightbox");
+    const lightboxImg = lightbox.querySelector("img");
+    const closeBtn = document.querySelector(".lightbox-close");
+
+    images.forEach(img => {
+      img.addEventListener("click", () => {
+        lightbox.classList.add("active");
+        lightboxImg.src = img.src;
+      });
+    });
+
+    closeBtn.addEventListener("click", () => {
+      lightbox.classList.remove("active");
+    });
+
+    lightbox.addEventListener("click", e => {
+      if (e.target === lightbox) {
+        lightbox.classList.remove("active");
+      }
+    });
+
+    // FILTER FUNCTIONALITY
+    const filterButtons = document.querySelectorAll(".filters button");
+    const galleryItems = document.querySelectorAll(".gallery-grid img");
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        // reset active
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        const filter = button.getAttribute("data-filter");
+        galleryItems.forEach(img => {
+          img.style.display =
+            filter === "all" || img.dataset.category === filter ? "block" : "none";
+        });
+      });
+    });
+  </script>
+          <script src="js.js"></script>
+
+</body>
+</html>
